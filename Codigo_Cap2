@@ -1,0 +1,47 @@
+#include <iostream>
+
+using namespace std;
+
+class NumberAggregator {
+    int numbers[10];
+    int count = 0;
+
+public:
+    void addNumber(int value) {
+        if (count < 10)
+            numbers[count++] = value;
+        else
+            cout << "Limite de 10 numeros alcanzado. No se agregara mas."<<endl;
+    }
+
+    int getSum() {
+        int sum = 0;
+        for (int index = 0; index < count; ++index) {
+            sum += numbers[index];
+        }
+        return sum;
+    }
+
+    double getAverage() {
+        return count == 0 ? 0.0 : static_cast<double>(getSum()) / count;
+    }
+};
+
+int main() {
+    NumberAggregator aggregator;
+    int totalNumbers;
+
+    cout << "Cuantos numeros ingresara? ";
+    cin >> totalNumbers;
+
+    for (int i = 0; i < totalNumbers; ++i) {
+        int inputNumber;
+        cout << "Numero: ";
+        cin >> inputNumber;
+        aggregator.addNumber(inputNumber);
+    }
+    cout << "Suma = " << aggregator.getSum() << '\n';
+    cout << "Promedio = " << aggregator.getAverage() << '\n';
+
+    return 0;
+}
